@@ -1,18 +1,27 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="pt-br">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreedomExpres</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+   
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+
+   
+  
 </head>
 <body>
     <h1>Menu base</h1>
-
     {% block content %}
     {% endblock %}
+  
+
 
 </body>
 </html>
