@@ -1,3 +1,79 @@
-body{
+
+
+.menubar-container{
     background-color: blue;
+    width:100%;
+    position: fixed;
+ 
 }
+
+.menubar-content{
+    background-color: green;
+    height: 90px;
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+
+/*Usuario sessão*/
+.menubar_user-container{
+    background-color: purple;
+    width: 200px;
+    height: 100%;
+    right:0;
+    position: absolute;
+}
+.menubar_user-content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 5px;
+    padding-right:10px ;
+}
+
+.menubar_user-content .perfil{   
+    background: rgb(233, 233, 233); 
+    background-image: url("../images/users/icons/UserIcon.png");
+    background-size: contain;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
+.menubar_user-content .perfil img{ 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*Menubar titulo*/
+.menubar-title{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.menubar-title h1{
+    color: white;
+}
+
+/*Botões*/
+.menubarbuttons-content{
+    background-color: pink;
+    display: flex;
+}
+
+.menubarbuttons-content button{
+    background: yellow;
+    width: 100%;
+    height: 60px;
+}
+
