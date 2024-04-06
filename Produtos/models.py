@@ -1,3 +1,12 @@
 from django.db import models
 
-# Create your models here.
+class Produto(models.Model):
+    nome = models.CharField(max_length= 70) 
+    representante = models.CharField(max_length= 70)
+    preco = models.IntegerField()
+    estoque = models.IntegerField(max_length= 70)
+   
+
+class Avaliacao(models.Model):
+    comentario = models.CharField(max_length= 150)
+    
