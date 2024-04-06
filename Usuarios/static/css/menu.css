@@ -1,14 +1,23 @@
 
+body{
+    background-color: #e9e9e9;
+
+}
+
+.content-container{
+    padding-top: 152px;
+}
+
 
 .menubar-container{
-    background-color: blue;
     width:100%;
     position: fixed;
+    border-bottom: 2px solid #006666;
  
 }
 
 .menubar-content{
-    background-color: green;
+    background-color: #006666;
     height: 90px;
     width: 100%;
     position: relative;
@@ -18,7 +27,7 @@
 
 /*Usuario sessão*/
 .menubar_user-container{
-    background-color: purple;
+    z-index: 1;
     width: 200px;
     height: 100%;
     right:0;
@@ -50,6 +59,65 @@
     object-fit: cover;
 }
 
+.useroptions{
+    background-color: #e9e9e9;
+    width: 100%;
+    position: absolute;
+    margin-top: 0px;
+    left: 0;    
+    transition: ease-in-out 0.05s;
+    overflow: hidden;
+    height: 0;
+    border: 0px solid;
+    margin-top: 85px;
+
+    
+}
+
+.menubar_user-content:hover .useroptions{
+
+    height: auto;
+    padding-bottom: 10px;
+    border: 1px solid #aca6a6;
+}
+
+.useroptions ul{
+    list-style: none;
+    padding: 0px;
+    padding-top: 10px;
+   
+}
+.useroptions ul li{
+    border-bottom: 1px solid #aca6a6;
+    padding: 10px;
+    font-weight: 600;
+    
+    cursor: pointer;
+    transition: ease-in-out 0.1s;
+    
+}
+
+.useroptions ul li:hover{
+    padding-left: 20px;
+    color: rgb(82, 82, 82);
+}
+
+.useroptions button{
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: none;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 3px;
+    transition: ease-in-out 0.1s;
+}
+
+.useroptions button:hover{
+    color: rgb(82, 82, 82);
+    font-size: 30px;
+}
+
 /*Menubar titulo*/
 .menubar-title{
     position: absolute;
@@ -67,13 +135,50 @@
 
 /*Botões*/
 .menubarbuttons-content{
-    background-color: pink;
     display: flex;
 }
 
 .menubarbuttons-content button{
-    background: yellow;
+    background:#008584;
     width: 100%;
     height: 60px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
 }
 
+.menubarbuttons-content button:hover{
+    background-color: #0a9191;
+}
+
+
+/*Dropdown*/
+.dropdown{
+    position: absolute;
+    z-index: 1;
+    align-self: center;
+   
+}
+
+.dropdown-container{
+   
+}
+
+.dropdown-btn,.dropdown-btn:hover{
+    background: none;
+    border: none;
+}
+
+
+.dropdown-btn span{
+    font-size: 80px;
+    color: white;
+    font-weight: 600;
+}
+
+.dropdown-menucontent{
+    background: #e9e9e9;
+    border-radius: 0;
+
+}

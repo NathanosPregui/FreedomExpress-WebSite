@@ -9,8 +9,11 @@
     <title>FreedomExpres</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
-    {% bootstrap_javascript %}
-   
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    
+
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
 
    
@@ -19,10 +22,35 @@
 <body>
     <div class="menubar-container">
         <div class="menubar-content">
+          
+            <div class="dropdown dropdown-container">
+                <a class="dropdown-btn " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+                </a>
+              
+                <ul class="dropdown-menu dropdown-menucontent" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="#">Suporte</a></li>
+                  <li><a class="dropdown-item" href="#">Sobre</a></li>
+                  <li><a class="dropdown-item" href="#">Informações</a></li>
+                </ul>
+              </div>
+            
+
             <div class="menubar_user-container">
                 <div class="menubar_user-content">
                     <div class="perfil">
                         <img src="" alt=""  onerror="this.style.backgroundColor = 'transparent'; this.style.objectFit = 'none'; this.style.display = 'none';">
+                    </div>
+                    <div class="useroptions">
+                        <ul>
+                            <li>Conta</li>
+                            <li>Meus pedidos</li>
+                            <li>Lista de desejos</li>
+                        </ul>
+                        <button>Login</button>
+                       
                     </div>
                 </div>
             </div>
@@ -39,10 +67,18 @@
         </div>
     </div>
     
-    {% block content %}
-    {% endblock %}
+
+    <div class="content-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+
+   
   
 
 
 </body>
+{% bootstrap_javascript %}
 </html>
