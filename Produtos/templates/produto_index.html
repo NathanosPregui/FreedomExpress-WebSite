@@ -1,0 +1,30 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    
+<table class="table table-striped">
+    <thead>
+        <th>Nome</th>
+        <th>Representante</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+
+    </thead>
+      <tbody>
+        {% if lista %}
+            {% for Produtos in lista %}
+                <tr>
+                    <td>{{ Produtos.representante }}</td>
+                    <td>{{ Produtos.nome }}</td>
+                    <td>{{ Produtos.preco }}</td>
+                    <td>{{ Produtos.estoque }}</td>
+                
+            {% endfor %}
+        {% else %}
+            <tr colspan="6">
+                <td>Nenhum Produto cadastrado</td>                   
+            </tr>
+        {% endif %} 
+      </tbody>  
+</table>
+{% endblock %}

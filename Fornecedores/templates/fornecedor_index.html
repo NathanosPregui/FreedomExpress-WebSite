@@ -1,0 +1,32 @@
+{% extends 'master.html' %}
+
+{% block content %}
+    
+<table class="table table-striped">
+    <thead>
+        <th>Empresa</th>
+        <th>Representante</th>
+        <th>Telefone</th>
+        <th>Endereço</th>
+        <th>País</th>
+
+    </thead>
+      <tbody>
+        {% if lista %}
+            {% for Fornecedores in lista %}
+                <tr>
+                    <td>{{ Fornecedores.empresa }}</td>
+                    <td>{{ Fornecedores.representante }}</td>
+                    <td>{{ Fornecedores.telefone }}</td>
+                    <td>{{ Fornecedores.endereco }}</td>
+                    <td>{{ Fornecedores.pais }}</td>
+                
+            {% endfor %}
+        {% else %}
+            <tr colspan="6">
+                <td>Nenhum Fornecedor cadastrado</td>                   
+            </tr>
+        {% endif %} 
+      </tbody>  
+</table>
+{% endblock %}
