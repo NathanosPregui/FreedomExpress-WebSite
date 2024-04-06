@@ -11,10 +11,12 @@
     {% bootstrap_css %}
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <!--Swiper-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     
 
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 
    
   
@@ -45,7 +47,6 @@
                     </div>
                     <div class="useroptions">
                         <ul>
-                            <li>Conta</li>
                             <li>Meus pedidos</li>
                             <li>Lista de desejos</li>
                         </ul>
@@ -61,9 +62,9 @@
         
         </div>
         <div class="menubarbuttons-content">
-            <button>Test1</button>
-            <button>Test2</button>
-            <button>Test3</button>
+            <button>Mais vendidos</button>
+            <button>Promoções</button>
+            <button>Categorias</button>
         </div>
     </div>
     
@@ -81,4 +82,10 @@
 
 </body>
 {% bootstrap_javascript %}
+
+<!--Swiper-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script src="{% static 'js/Carousel.js' %}"></script>
+
 </html>
