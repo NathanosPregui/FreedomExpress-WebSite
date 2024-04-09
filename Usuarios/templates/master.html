@@ -30,9 +30,13 @@
 
             <div class="menubar_user-container">
                 <div class="menubar_user-content">
-                    <div class="perfil">
-                        <img src="" alt=""  onerror="this.style.backgroundColor = 'transparent'; this.style.objectFit = 'none'; this.style.display = 'none';">
+                    <div class="perfil-container">
+                        <h5>Nome grande da Silva</h5>
+                        <div class="perfil">
+                            <img src="" alt=""  onerror="this.style.backgroundColor = 'transparent'; this.style.objectFit = 'none'; this.style.display = 'none';">
+                        </div>
                     </div>
+                    
                     <div class="useroptions">
                         <ul>
                             <li>Meus pedidos</li>
@@ -48,8 +52,12 @@
                 <a href="{% url 'index' %}" class="h1">FreedomExpres</a>
 
                 <form role="search" action="{% url 'pesquisar_produto' %}" method="GET" class="searchbar-container">
-                    <input type="text" name="search" id="meuInput" value="{{ request.GET.search }}" placeholder="Pesquisar..." onkeyup="verificarInput()">
-                    <button type="button" id="meuBotao">Buscar</button>
+                    <input type="text" class="search-input" name="search" id="meuInput" value="{{ request.GET.search }}" placeholder="Pesquisar..." onkeyup="verificarInput()">
+                    <button type="button" class="search-button" id="meuBotao">
+                        <span class="material-symbols-outlined">
+                            search
+                        </span>
+                    </button>
 
                 </form>
             </div>

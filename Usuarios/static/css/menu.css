@@ -29,10 +29,15 @@ body{
 /*Usuario sessão*/
 .menubar_user-container{
     z-index: 1;
-    width: 200px;
+    width: 350px;
     height: 100%;
     right:0;
     position: absolute;
+    cursor: pointer;
+    transition: ease-in-out 0.1s;
+}
+.menubar_user-container:hover{
+    background: rgba(208, 227, 238, 0.452);
 }
 .menubar_user-content{
     width: 100%;
@@ -41,6 +46,15 @@ body{
     flex-direction: row-reverse;
     padding: 5px;
     padding-right:10px ;
+}
+
+.perfil-container{
+    display: flex;
+    align-items: center;
+}
+.perfil-container h5{
+  margin-right: 10px;
+  color: white;
 }
 
 .menubar_user-content .perfil{   
@@ -52,7 +66,14 @@ body{
     overflow: hidden;
     aspect-ratio: 1/1;
     cursor: pointer;
+    border: 1px solid rgb(0, 0, 0);
+ 
 }
+
+.menubar_user-container:hover .perfil{
+    border: 2px solid rgb(255, 255, 255);
+  }
+  
 
 .menubar_user-content .perfil img{ 
     width: 100%;
@@ -134,6 +155,56 @@ body{
     color: white;
     text-decoration: none;
 }
+/*Barra de pesquisa*/
+.searchbar-container{
+    display: flex;
+    width: 400px;
+    height: 50px;
+    margin-left: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+.searchbar-container .search-input{
+   padding: 10px; 
+   border: none;
+   width: 100%;
+   outline: none;
+}
+.searchbar-container .search-input:enabled{
+    border: none;
+    outline: none;
+    
+ }
+.searchbar-container .search-button{
+    border: none;
+    background: #00aaaa;
+    color: white;
+    width: 50px;
+    height: 100%;
+   
+}
+.searchbar-container .search-button:hover{
+    background: #10bbbb;
+
+}
+
+.searchbar-container .search-button:active{
+    background: #097e7e;
+    border-top: 2px solid #02323a;
+    border-left: 2px solid #02323a;
+
+}
+
+
+.searchbar-container .search-button span{
+    font-size: 30px;
+    text-shadow: 1px 1px black;
+    transform: translateY(3px);
+}
+
+
+
 
 /*Botões*/
 .menubarbuttons-content{
@@ -163,9 +234,7 @@ body{
    
 }
 
-.dropdown-container{
-   
-}
+
 
 .dropdown-btn,.dropdown-btn:hover{
     background: none;
