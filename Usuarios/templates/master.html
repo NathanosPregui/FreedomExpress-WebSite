@@ -25,19 +25,7 @@
     <div class="menubar-container">
         <div class="menubar-content">
           
-            <div class="dropdown dropdown-container">
-                <a class="dropdown-btn " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="material-symbols-outlined">
-                        menu
-                    </span>
-                </a>
-              
-                <ul class="dropdown-menu dropdown-menucontent" aria-labelledby="dropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Suporte</a></li>
-                  <li><a class="dropdown-item" href="#">Sobre</a></li>
-                  <li><a class="dropdown-item" href="#">Informações</a></li>
-                </ul>
-              </div>
+            
             
 
             <div class="menubar_user-container">
@@ -56,12 +44,19 @@
                 </div>
             </div>
 
-            <div class="menubar-title">
-                <h1>FreedomExpres</h1>
+            <div class="menubar-title">       
+                <a href="{% url 'index' %}" class="h1">FreedomExpres</a>
+
+                <form role="search" action="{% url 'pesquisar_produto' %}" method="GET" class="searchbar-container">
+                    <input type="text" name="search" id="meuInput" value="{{ request.GET.search }}" placeholder="Pesquisar..." onkeyup="verificarInput()">
+                    <button type="button" id="meuBotao">Buscar</button>
+
+                </form>
             </div>
         
         </div>
-        <div class="menubarbuttons-content">
+        <div class="menubarbuttons-content">           
+            <button>Categorias</button>
             <button>Mais vendidos</button>
             <button>Promoções</button>
             <button>Categorias</button>
@@ -88,4 +83,16 @@
 
 <script src="{% static 'js/Carousel.js' %}"></script>
 
+<script>
+    function verificarInput() {
+            var input = document.getElementById('meuInput');
+            var botao = document.getElementById('meuBotao');
+
+            if (input.value.trim() !== "") {
+                botao.type = "submit";
+            } else {
+                botao.type = "button";
+            }
+        }
+</script>
 </html>

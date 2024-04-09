@@ -130,8 +130,9 @@ body{
     justify-content: center;
     align-items: center;
 }
-.menubar-title h1{
+.menubar-title .h1{
     color: white;
+    text-decoration: none;
 }
 
 /*Botões*/

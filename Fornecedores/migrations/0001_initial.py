@@ -17,9 +17,10 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('empresa', models.CharField(max_length=50)),
                 ('representante', models.CharField(max_length=70)),
-                ('telefone', models.IntegerField()),
+                ('telefone', models.CharField(max_length=14)),
                 ('endereco', models.CharField(max_length=70)),
                 ('pais', models.CharField(max_length=80)),
+                ('cnpj', models.CharField(max_length=14)),
             ],
         ),
     ]

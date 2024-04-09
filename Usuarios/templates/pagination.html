@@ -1,0 +1,42 @@
+{%if lista.paginator.num_pages > 1 %}
+    <nav aria-label="Page navigation" class="position-absolute bottom-0 start-50 translate-middle-x">
+        <ul class="pagination">
+            {% if lista.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ lista.previous_page_number }}&search={{ search }}">Anterior</a></li>
+            {% endif %}
+
+            {% if lista.number > 1 %}
+            
+                {% if lista.number > 4 %}
+                    <li class="page-item"><a class="page-link" href="?page=1&search={{ search }}">1...</a></li>
+                {% endif %}
+            {% endif %}
+
+            {% for page_num in lista.paginator.page_range %}
+                {% if page_num == lista.number %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ page_num }}</a></li>
+                {% elif page_num > lista.number|add:"-3" and page_num < lista.number|add:"3" %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_num }}&search={{ search }}">{{ page_num }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+        
+            
+            {% if lista.number|add:"4" <= lista.paginator.num_pages %}
+                <li class="page-item"><a class="page-link" href="?search={{request.GET.search}}?page={{ lista.paginator.num_pages }}&search={{ search }}">...{{lista.paginator.num_pages}}</a></li>
+            {% endif %}
+        
+            
+        
+
+        {% if lista.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ lista.next_page_number }}&search={{ search }}">Próximo</a></li>
+        {% endif %}
+
+            
+
+
+
+        </ul>
+    </nav>
+{% endif %}

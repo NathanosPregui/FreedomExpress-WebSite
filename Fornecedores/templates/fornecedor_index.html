@@ -6,6 +6,7 @@
     <thead>
         <th>Empresa</th>
         <th>Representante</th>
+        <th>CNPJ</th>
         <th>Telefone</th>
         <th>Endereço</th>
         <th>País</th>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>{{ Fornecedores.empresa }}</td>
                     <td>{{ Fornecedores.representante }}</td>
+                    <td>{{ Fornecedores.cnpj}}</td>
                     <td>{{ Fornecedores.telefone }}</td>
                     <td>{{ Fornecedores.endereco }}</td>
                     <td>{{ Fornecedores.pais }}</td>
@@ -24,7 +26,9 @@
             {% endfor %}
         {% else %}
             <tr colspan="6">
-                <td>Nenhum Fornecedor cadastrado</td>                   
+                <td class="text-center" colspan="6">
+                    Nenhum fornecedor cadastrado
+                </td>                          
             </tr>
         {% endif %} 
       </tbody>  

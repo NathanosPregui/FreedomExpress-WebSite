@@ -5,7 +5,7 @@
 <table class="table table-striped">
     <thead>
         <th>Nome</th>
-        <th>Representante</th>
+        <th>Distribuidor</th>
         <th>Preço</th>
         <th>Estoque</th>
 
@@ -14,17 +14,19 @@
         {% if lista %}
             {% for Produtos in lista %}
                 <tr>
-                    <td>{{ Produtos.representante }}</td>
                     <td>{{ Produtos.nome }}</td>
+                    <td>{{ Produtos.distribuidor }}</td>                  
                     <td>{{ Produtos.preco }}</td>
                     <td>{{ Produtos.estoque }}</td>
                 
             {% endfor %}
         {% else %}
-            <tr colspan="6">
-                <td>Nenhum Produto cadastrado</td>                   
+            <tr>
+                <td colspan="6">Nenhum Produto cadastrado</td>                   
             </tr>
         {% endif %} 
       </tbody>  
 </table>
+{% include 'pagination.html' %}
+
 {% endblock %}
