@@ -21,16 +21,16 @@ from django.conf.urls.static import static
 
 
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Usuarios.urls')),
     path('cliente/',include('Clientes.urls')),
     path('fornecedor/',include('Fornecedores.urls')),
     path('produtos/',include('Produtos.urls')),
-    path('accounts/',include('django.contrib.auth.urls')),
 
 
 
     
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

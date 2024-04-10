@@ -4,7 +4,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length= 70) 
     distribuidor  = models.CharField(max_length= 70)
     preco = models.IntegerField()
-    estoque = models.IntegerField(max_length= 70)
+    estoque = models.IntegerField()
    
 
 class Avaliacao(models.Model):

@@ -1,64 +1,52 @@
 {% extends 'master.html' %}
 {% block content %}
     <h4>Cadastro de clientes</h4>
-   <form action="{%url 'criar_cliente' %}" method="post">
-    {% csrf_token %}
-    <div class="row">
-        <div class="col-md-3">
-            <label for="nome">Nome</label>
-            <input type="text" name="nome" class="form-control">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" required>
         </div>
-    </div>    
-    <div class="row">
-        <div class="col-md-3">
-            <label for="sobrenome">Sobrenome</label>
-            <input type="text" name="sobrenome" class="form-control">
+        <div>
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" name="sobrenome" required>
         </div>
-    </div>   
-    <div class="row">
-        <div class="col-md-3">
-            <label for="data_nascimento">Data de nascimento</label>
-            <input type="date" name="data_nascimento" class="form-control">
+        <div>
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" name="data_nascimento" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">E-mail</label>
-            <input type="text" name="email" class="form-control">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">CPF</label>
-            <input type="number" name="cpf" class="form-control">
+        <div>
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">Senha</label>
-            <input type="text" name="senha" class="form-control">
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" name="senha" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">Rua</label>
-            <input type="text" name="rua" class="form-control">
+        <div>
+            <label for="rua">Rua:</label>
+            <input type="text" name="rua" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">Complemento</label>
-            <input type="text" name="complemento" class="form-control">
+        <div>
+            <label for="numero">Número:</label>
+            <input type="number" name="numero" required>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label for="email">Número</label>
-            <input type="text" name="numero" class="form-control">
+        <div>
+            <label for="complemento">Complemento:</label>
+            <input type="text" name="complemento">
         </div>
-    </div>
-    <div class="d-flex justify-content-end">
-        <button class="d-flex justify-content-end btn btn-success">Cadastrar</button>
-    </div>
-   </form> 
+        <div>
+            <input type="submit" value="Registrar">
+        </div>
+
+   
+        <input type="file" id="perfilimage" name="perfilimage" accept="image/*">
+
+   
+    </form>
+    
    {% endblock %}

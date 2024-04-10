@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
 class Fornecedor(models.Model):
     empresa = models.CharField(max_length= 50) 
     representante = models.CharField(max_length= 70)

@@ -6,31 +6,31 @@
     <div class="col-md4 offset-md4-4">
         <div class="card auth-card">
             <div class="card-body">
+                {{ error_message }}
                 <h4 class="card-title text-center">
                     Entrar
                 </h4>
-                <form  method="post">
-                    {% csrf_token %%}
+                <form  action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+               
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="form-control" value="{{ request.POST.email}}">                            
+                            {% if erros.email %}<span class="text-danger">{{ erros.email }}</span>{% endif %}
+                        </div>
+                    </div>  
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="senha">Senha</label>
+                            <input type="password" name="senha" class="form-control" value="{{ request.POST.senha}}">                            
+                            {% if erros.senha %}<span class="text-danger">{{ erros.senha }}</span>{% endif %}
+                        </div>
+                    </div>  
+
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 </form>
-                <input type="hidden" name="next" value="{{next}}">
-
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ request.POST.email}}">                            
-                        {% if erros.email %}<span class="text-danger">{{ erros.email }}</span>{% endif %}
-                    </div>
-                </div>  
-
-                <div class="row mb-3">
-                    <div class="col-md-3">
-                        <label for="senha">Senha</label>
-                        <input type="password" name="senha" class="form-control" value="{{ request.POST.senha}}">                            
-                        {% if erros.senha %}<span class="text-danger">{{ erros.senha }}</span>{% endif %}
-                    </div>
-                </div>  
-
-                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
             </div>
         </div>
     </div>
