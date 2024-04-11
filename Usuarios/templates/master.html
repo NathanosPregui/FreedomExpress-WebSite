@@ -6,7 +6,7 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreedomExpres</title>
+    <title>FreedomExpress</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
 
@@ -18,16 +18,14 @@
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
     <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 
+
    
   
 </head>
 <body>
     <div class="menubar-container">
         <div class="menubar-content">
-          
-            
-            
-
+  
             <div class="menubar_user-container">
                 <div class="menubar_user-content">
                     <div class="perfil-container">
@@ -60,9 +58,15 @@
                     </div>
                 </div>
             </div>
-
+            <div class="carrinho">
+                <span class="material-symbols-outlined">
+                    shopping_cart
+                </span>
+            </div>
             <div class="menubar-title">       
-                <a href="{% url 'index' %}" class="h1">FreedomExpres</a>
+                <a href="{% url 'index' %}" class="h1 title">
+                    <img src="{% static 'images/icons/LogoFreedom.png' %}" alt="">
+                </a>
 
                 <form role="search" action="{% url 'pesquisar_produto' %}" method="GET" class="searchbar-container">
                     <input type="text" class="search-input" name="search" id="meuInput" value="{{ request.GET.search }}" placeholder="Pesquisar..." onkeyup="verificarInput()">

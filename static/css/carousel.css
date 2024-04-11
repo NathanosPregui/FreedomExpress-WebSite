@@ -62,11 +62,33 @@
 
 
 .swiper-button-next,.swiper-button-prev{
+    position: absolute;
+    margin: 0;
     color: #06cccc;
+    transition: ease-in-out 0.1s;
+    height: 100%;
+    width: 60px;
+    
+    
+    
 }
+.swiper-button-next{
+    transform:  translateY(-50%) translateX(15px);
+}
+.swiper-button-prev{
+    transform:  translateY(-50%) translateX(-15px);
+}
+.swiper-button-prev:hover{
+    background: linear-gradient(90deg, rgb(255, 255, 255,0.5) 0%, rgba(255,255,255,0) 100%);
+}
+.swiper-button-next:hover{
+    background: linear-gradient(-90deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+}
+
 
 .swiper-button-next:hover,.swiper-button-prev:hover{
     color: #51e6e6;
+    
 }
 
 /*Produtos*/

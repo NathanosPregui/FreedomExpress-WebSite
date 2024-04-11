@@ -1,30 +1,18 @@
 {% extends 'master.html' %}
 
+
 {% block content %}
     <h4>Cadastro de clientes</h4>
-    <form action="{% url 'criar_produto' %}" method="post">
+    <form action="{% url 'criar_produto' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         
         <div class="row">
             <div class="col-md-3">
                 <label for="nome">Nome do produto</label>
-                <input type="text" name="nome" class="form-control" value="{{ request.POST.nome}}">                            
-                {% if erros.nome %}<span class="text-danger">{{ erros.nome }}</span>{% endif %}
+                <input type="text" name="nome" class="form-control" value="{{ request.POST.nome}}" required>                            
             </div>
         </div>    
         
-        <div class="row">
-            <div class="col-md-3">
-                <label for="distribuidor ">Distribuidor </label>
-                <select class="form-select" name="distribuidor " aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>                
-                {% if erros.distribuidor  %}<span class="text-danger">{{ erros.distribuidor  }}</span>{% endif %}
-            </div>
-        </div>   
         
         <div class="row">
             <div class="col-md-3">
@@ -37,13 +25,23 @@
         <div class="row mb-3">
             <div class="col-md-3">
                 <label for="estoque">Estoque</label>
-                <input type="number" name="estoque" class="form-control" value="{{ request.POST.estoque }}">
-                {% if erros.estoque %}<span class="text-danger">{{ erros.estoque }}</span>{% endif %}
+                <input type="number" name="estoque" class="form-control" value="{{ request.POST.estoque }}" required>
             </div>
         </div>      
         
         <div class="col-auto mb-3">
             <button class="d-flex justify-content-end btn btn-success">Cadastrar</button>
         </div>
+       
+        {% for i in "0123456789" %}
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="image{{ i }}">Imagem {{ i }}</label>
+                <input type="file" name="image{{ i }}" class="form-control" accept="image/*">
+            </div>
+        </div>
+        {% endfor %}
+
+       
     </form> 
 {% endblock %}

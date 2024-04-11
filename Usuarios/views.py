@@ -15,17 +15,22 @@ def index(request):
 
 
 def login_user(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        user = authenticate(request, email=email, password=senha)
-        if user is not None:
-            login(request, user)
-            return redirect('index')  # Redirecionar para a página inicial após o login
-        else:
-            return HttpResponse('Credenciais inválidas')
+    usuario = request.user
+               
+    if usuario.is_authenticated:
+        return redirect('index')
+    else:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            senha = request.POST.get('senha')
+            user = authenticate(request, email=email, password=senha)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  # Redirecionar para a página inicial após o login
+            else:
+                return HttpResponse('Credenciais inválidas')
 
-    return render(request, 'login.html')
+        return render(request, 'login.html')
 
 def logout(request):
     auth_logout(request)

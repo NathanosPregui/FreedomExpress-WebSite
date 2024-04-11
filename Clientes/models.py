@@ -66,7 +66,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     
     
 def user_directory_path(instance, filename):
-    # Arquivo será carregado para MEDIA_ROOT/static/images/users/perfilusers/<id_do_usuario>/<filename>
     ext = filename.split('.')[-1]  # obtém a extensão do arquivo
     filename = f'perfilimage.{ext}'  
     return 'perfilusers/{0}/{1}'.format(instance.usuario.id, filename)

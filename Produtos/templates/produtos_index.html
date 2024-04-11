@@ -1,32 +1,61 @@
 {% extends 'master.html' %}
 
 {% block content %}
-    
-<table class="table table-striped">
-    <thead>
-        <th>Nome</th>
-        <th>Distribuidor</th>
-        <th>Preço</th>
-        <th>Estoque</th>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/loja.css' %}">
 
-    </thead>
-      <tbody>
-        {% if lista %}
-            {% for Produtos in lista %}
-                <tr>
-                    <td>{{ Produtos.nome }}</td>
-                    <td>{{ Produtos.distribuidor }}</td>                  
-                    <td>{{ Produtos.preco }}</td>
-                    <td>{{ Produtos.estoque }}</td>
-                
-            {% endfor %}
-        {% else %}
-            <tr>
-                <td colspan="6">Nenhum Produto cadastrado</td>                   
-            </tr>
-        {% endif %} 
-      </tbody>  
-</table>
+<div class="loja-container">
+    <div class="filtros">
+        <h2>FILTROS</h2>
+        <ul>
+            <li>Filtros doidos e legais</li>
+            <li>Muito legais</li>
+        </ul>
+        <ul>
+            <li>Filtros doidos e legais</li>
+            <li>Muito legais</li>
+        </ul>
+        <ul>
+            <li>Filtros doidos e legais</li>
+            <li>Muito legais</li>
+        </ul>
+        <ul>
+            <li>Filtros doidos e legais</li>
+            <li>Muito legais</li>
+        </ul>
+        <ul>
+            <li>Filtros doidos e legais</li>
+            <li>Muito legais</li>
+        </ul>
+    </div>
+    <div class="produtos-container">
+        {% for item in produtos_com_imagens %}   
+            <div class="produto-card">
+                    <div class="produto-image">
+                        {% if item.imagem %}
+                        <img src="{{ item.imagem.image.url }}" alt="{{ item.produto.nome }}">
+                    {% else %}
+                        <p>Nenhuma imagem disponível</p>
+                    {% endif %}
+                    </div>
+                    <div class="produtos-info">
+                        <div class="nome">
+                            <h2>{{ item.produto.nome }}</h2>
+                        </div>
+                     
+                        <div class="preco">
+                            <h2>R${{ item.produto.preco }}</h2>
+                        </div>
+                        
+                    </div> 
+            </div>
+            
+        {% endfor %}
+        </div>
+</div>
+
+
+
 {% include 'pagination.html' %}
 
 {% endblock %}

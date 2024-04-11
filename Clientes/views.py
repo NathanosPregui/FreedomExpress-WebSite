@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from Clientes import views
 from .models import Usuario
 from .models import PerfilImages
+from django.contrib import messages
 
 
 '''def criar(request):
@@ -31,42 +32,62 @@ def cadastro(request):
 
 def cadastro(request):
 
-    if request.method == 'POST':
-        # Coletar dados do formulário
-        nome = request.POST.get('nome')
-        sobrenome = request.POST.get('sobrenome')
-        data_nascimento = request.POST.get('data_nascimento')
-        email = request.POST.get('email')
-        cpf = request.POST.get('cpf')
-        senha = request.POST.get('senha')
-        rua = request.POST.get('rua')
-        numero = request.POST.get('numero')
-        complemento = request.POST.get('complemento')
-        perfilimage = request.FILES.get('perfilimage')  # Certifique-se de que o campo de upload é um campo de arquivo
+    usuario = request.user
+    if usuario.is_authenticated:
+        return redirect('index')
+    else:
+        if request.method == 'POST':
+            # Coletar dados do formulário
+            nome = request.POST.get('nome')
+            sobrenome = request.POST.get('sobrenome')
+            data_nascimento = request.POST.get('data_nascimento')
+            email = request.POST.get('email')
+            cpf = request.POST.get('cpf')
+            senha = request.POST.get('senha')
+            confirmarsenha = request.POST.get('confirsenha')
+            rua = request.POST.get('rua')
+            numero = request.POST.get('numero')
+            complemento = request.POST.get('complemento')
+            perfilimage = request.FILES.get('perfilimage')  # Certifique-se de que o campo de upload é um campo de arquivo
 
-        # Criar um novo usuário
-        novo_usuario = Usuario.objects.create_user(
-            email=email,
-            senha=senha,
-            nome=nome,
-            sobrenome=sobrenome,
-            data_nascimento=data_nascimento,
-            cpf=cpf,
-            rua=rua,
-            numero=numero,
-            complemento=complemento
-        )
+            # Criar um novo usuário
+           
+            # Verifica se todos os campos foram preenchidos
+            if confirmarsenha == senha:
+                novo_usuario = Usuario.objects.create_user(
+                    email=email,
+                    senha=senha,
+                    nome=nome,
+                    sobrenome=sobrenome,
+                    data_nascimento=data_nascimento,
+                    cpf=cpf,
+                    rua=rua,
+                    numero=numero,
+                    complemento=complemento
+                )
 
-        # Criar uma nova instância de PerfilImages
-        if perfilimage:  # Verifique se uma imagem foi fornecida
-            PerfilImages.objects.create(
-                usuario=novo_usuario,
-                image=perfilimage
-            )
+                # Criar uma nova instância de PerfilImages
+                if perfilimage:  # Verifique se uma imagem foi fornecida
+                    PerfilImages.objects.create(
+                        usuario=novo_usuario,
+                        image=perfilimage
+                    )
 
-        return redirect('cliente_index')  # Redirecionar para a página de cadastro após o registro
+                return redirect('cliente_index')  # Redirecionar para a página de cadastro após o registro
 
-    return render(request, 'cliente_cadastro.html')
+            else:      
+                erros = {}                     
+                erros['confirmarsenha'] =  'Senha diferente'
+
+                if erros:
+                    for field, error in erros.items():
+                        messages.error(request, error)
+
+                if erros:
+                    return render(request, 'cliente_cadastro.html', {'erros': erros})
+
+            
+        return render(request, 'cliente_cadastro.html')
 
 def index(request):
     lista_clientes = Usuario.objects.all()
