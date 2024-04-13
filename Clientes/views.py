@@ -55,7 +55,7 @@ def cadastro(request):
                         image=perfilimage
                     )
 
-                return redirect('cliente_index')  # Redirecionar para a página de cadastro após o registro
+                return redirect('login')  # Redirecionar para a página de cadastro após o registro
 
             else:      
                 erros = {}                     

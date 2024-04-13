@@ -35,20 +35,15 @@ def login_user(request):
         if request.method == 'POST':
             email = request.POST.get('email')
             senha = request.POST.get('senha')
- 
+            user = authenticate(request,email=email,password=senha)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  # Redirecionar para a página inicial após o login
+        else:
+            return render(request, 'login.html',{'error_message':'usuario inexistente'})
+        return render(request, 'login.html',{'error_message':'usuario inexistente'})
 
-          
-            if  Usuario.objects.filter(email=email).exists():
-  
-                veremail = Usuario.objects.filter(password=request.POST.get('senha')).exists()
-                user = authenticate(request,email=email,password=senha)
-                if user is not None:
-                    login(request, user)
-                    return redirect('index')  # Redirecionar para a página inicial após o login
-                else:
-                    return render(request, 'login.html',{'error_message':veremail})
 
-        return render(request, 'login.html')
 
 def logout(request):
     auth_logout(request)
