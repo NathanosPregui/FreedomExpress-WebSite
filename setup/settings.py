@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.FreedomExpress',
+        'NAME': 'dbFreedomExpress.sqlite3',
     }
 }
 

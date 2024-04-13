@@ -38,7 +38,7 @@ def cadastro(request):
             if confirmarsenha == senha:
                 novo_usuario = Usuario.objects.create_user(
                     email=email,
-                    password=senha,
+                    senha=senha,
                     nome=nome,
                     sobrenome=sobrenome,
                     data_nascimento=data_nascimento,

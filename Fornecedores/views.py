@@ -64,7 +64,7 @@ def criar(request):
             pais=pais
         )
 
-        return redirect('fornecedor_index')
+        return redirect('meus_produtos')
 
     return render(request, 'fornecedor_cadastro.html')
 
