@@ -6,34 +6,30 @@
 {% block content%}
    
    
-    
+    <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
 
     
     <div class="swiper-container">
         <div class="swiper mySwiper principalCarousel">
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper">         
               <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
+                <img src="{% static 'images/Carousel_images/Principal/Propa1.png'%}" alt="">
               </div>
               <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
+                <img src="{% static 'images/Carousel_images/Principal/Propa2.png'%}" alt="">
               </div>
               <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image2.jpg'%}" alt="">
+                <img src="{% static 'images/Carousel_images/Principal/Propa3.png'%}" alt="">
               </div>
               <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image3.png'%}" alt="">
+                <img src="{% static 'images/Carousel_images/Principal/Propa4.png'%}" alt="">
               </div>
               <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image4.jpg'%}" alt="">
+                <img src="{% static 'images/Carousel_images/Principal/Propa5.png'%}" alt="">
               </div>
-              <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image5.jpg'%}" alt="">
-              </div>
-              <div class="swiper-slide">
-                <img src="{% static 'images/Carousel_images/Principal/Image6.webp'%}" alt="">
-              </div>
+            
             </div>
+           
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
@@ -43,92 +39,37 @@
     <div class="separte">
 
     </div>
+    {% for categoria, produtos in produtos_com_imagens_por_categoria.items %}
+    <h1 style="text-align: center;padding: 20px;font-size: 65px;">{{categoria}}</h1>
     <div class="swiperproducts-container">
         <div class="swiper mySwiper2">
             <div class="swiper-wrapper">
+                {% for produto_imagem in produtos %}
                 <div class="swiper-slide">
                     <div class="product-card">
+                        <a href="{% url 'visualizar_produto' produto_imagem.produto.id %}"></a>
                         <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
+                            <img src="{{produto_imagem.imagem.image.url}}" alt="">
                         </div>
                         <div class="product-info">
-                            <h4>Produto</h4>
+                            <h4>{{produto_imagem.produto.nome}}</h4>
 
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
+                            <h4 class="price">R${{produto_imagem.produto.preco}}</h4>
+                            {%if produto_imagem.produto.preco > 300 %}
+                                <h4 class="sales">(9)mil</h4>
+                            {%elif produto_imagem.produto.preco >= 200 and produto_imagem.produto.preco < 300 %}
+                                <h4 class="sales">(10)mil</h4>
+                            {%elif produto_imagem.produto.preco >= 100 and produto_imagem.produto.preco < 199 %}
+                                <h4 class="sales">(50)mil</h4>
+                            {%elif produto_imagem.produto.preco >= 0 and produto_imagem.produto.preco < 99 %} 
+                                <h4 class="sales">(100)mil</h4>   
+                            {%endif%}
+                      
                         </div>
                     </div>
                 </div>
-
-                <div class="swiper-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <h4>Produto</h4>
-
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <h4>Produto</h4>
-
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <h4>Produto</h4>
-
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <h4>Produto</h4>
-
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{% static 'images/Carousel_images/Principal/Image1.jpg'%}" alt="">
-                        </div>
-                        <div class="product-info">
-                            <h4>Produto</h4>
-
-                            <h4 class="price">Preço</h4>
-                            <h4 class="sales">Vendidos</h4>
-                        </div>
-                    </div>
-                </div>
+                {%endfor%}
+              
                   
             </div>
             
@@ -136,9 +77,12 @@
             <div class="swiper-button-prev"></div>
           </div>
     </div>
-
+    {%endfor%}
     <div class="separte"></div>
    
-    
+    <!--Swiper-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script src="{% static 'js/Carousel.js' %}"></script>
 
 {% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+
+{% block content %}
+{% load static %}
+<style>
+    .erro h1 ,.erro h4{
+        text-align: center;
+    }
+    .erro{
+        margin-top: 50px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .erro img{
+        width: 500px;
+        height: auto;
+        border-radius: 30px;
+        box-shadow: 5px 5px rgba(44, 58, 66, 0.719);
+        transition: ease-in-out 0.2s;
+   
+    }
+    .erro:hover img{
+        transform: scaleX(-3);
+    }
+</style>
+
+<div class="position-absolute top-50 start-50 translate-middle erro" style="display: flex;flex-direction: column;">
+        <h1>Erro 404</h1>
+        <h3>Produto não encontrado</h3>
+        <img src="https://i.imgflip.com/6rjrj5.jpg" alt="">
+        <a href=""></a>
+        <div class="row">
+            <a href="{% url 'index'%}" style="width: 100%; width: 500px;" class="btn btn-primary">
+                Página principal
+            </a>             
+        </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'master.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/formsForne.css' %}">
+
+<div  class="form-card-background">
+    <div class="form-card card-forne">
+        <form action="{% url 'atualizar_fornecedor' %}" method="post">
+        <input type="hidden" name="id" value="{{fornecedor.id}}">
+   
+        <h4 class="text-center">Editar loja</h4>
+        {% csrf_token %}
+        <div class="center-elements row">
+                <div class="mb-3">
+                        <label for="nomeempresa" class="form-label">Nome da empresa</label>
+                        <input type="text" name="nomeempresa" class="form-control" value="{{fornecedor.empresa}}" required>                            
+                </div>    
+            
+                
+                <div class="mb-3">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="text" name="telefone" class="form-control" value="{{fornecedor.telefone}}" required>
+                </div>
+                
+                <div class="mb-3">
+                        <label for="CNPJ" class="form-label">CNPJ</label>
+                        <input type="text" name="CNPJ" class="form-control" value="{{fornecedor.cnpj}}" required>
+                </div>
+                
+                <div class="mb-3">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <input type="text" name="endereco" class="form-control" value="{{fornecedor.endereco}}" required>
+                </div>
+                
+                <div class="mb-3">
+                        <label for="pais" class="form-label">País</label>
+                        <input type="text" name="pais" class="form-control" value="{{fornecedor.pais}}" required>
+                </div>
+                
+                <div class="col-auto mb-3">
+                    <button class="d-flex justify-content-end btn btn-success">Salvar Alterações</button>
+                </div>
+            </form> 
+            </div>
+            
+    </div>
+    
+</div>
+    
+{% endblock %}

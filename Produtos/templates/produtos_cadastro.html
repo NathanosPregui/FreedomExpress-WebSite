@@ -2,46 +2,114 @@
 
 
 {% block content %}
-    <h4>Cadastro de clientes</h4>
-    <form action="{% url 'criar_produto' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        
-        <div class="row">
-            <div class="col-md-3">
+{% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/produtocadastro.css' %}">
+
+    <div class="cadastrocard">
+        <h1>VENDER PRODUTO</h1>
+        <form action="{% url 'criar_produto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="mb-3">
                 <label for="nome">Nome do produto</label>
                 <input type="text" name="nome" class="form-control" value="{{ request.POST.nome}}" required>                            
+            </div>    
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="preco">Preço</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" aria-label="" name="preco" value="{{ request.POST.preco}}">
+                    </div>
+                </div>
+            
+                <div class="col">
+                    <label for="estoque">Estoque</label>
+                    <input type="number" name="estoque" class="form-control" value="{{ request.POST.estoque }}" required>
+                </div>     
+                <div class="col">
+                    <label for="estoque">Categoria</label>
+                    <select class="form-select" aria-label="Default select example" name="cateroria" required>
+                        <option value="">Nenhuma</option>
+                        <option value="Brinquedos">Brinquedos</option>
+                        <option value="Action-Figures">Action-Figures</option>
+                        <option value="Cosplay">Cosplay</option>
+                        <option value="Maquiagem">Maquiagem</option>
+                        <option value="Roupas">Roupas</option>
+                        <option value="peças">Peças</option>
+                        <option value="Eletronicos">Eletrônicos</option>
+                        <option value="Livros">Livros</option>
+                        <option value="Moveis">Móveis</option>
+                        <option value="Decoracao">Decoração</option>
+                        <option value="Esportes">Artigos Esportivos</option>
+                    </select>
+                </div>         
+                
             </div>
-        </div>    
-        
-        
-        <div class="row">
-            <div class="col-md-3">
-                <label for="preco">Preço</label>
-                <input type="text" name="preco" class="form-control" value="{{ request.POST.preco }}">
-                {% if erros.preco %}<span class="text-danger">{{ erros.preco }}</span>{% endif %}
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="descricao"></textarea>
             </div>
+            
+            <div class="h4 centertitle">Imagens do produto</div>
+            <div class="mb-3 containerimgs">
+            {% for i in "0123456789" %}           
+                    <div class="imagesupload-container">
+                        <input type="hidden" id="image-url{{ i }}" name="imgurl{{i}}">
+                        <label for="input-img{{ i }}" class="imgupload">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <img id="profile-img{{ i }}" src="{{ request.POST.imgurl|add:i }}" alt="imagem{{i}}" onerror="this.style.display = 'none';">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <input type="file" id="input-img{{ i }}" name="image{{ i }}" class="form-control" accept="image/*">
+                         
+                        </label>
+                    </div>
+               
+            {% endfor %}
+           
         </div>
         
-        <div class="row mb-3">
-            <div class="col-md-3">
-                <label for="estoque">Estoque</label>
-                <input type="number" name="estoque" class="form-control" value="{{ request.POST.estoque }}" required>
-            </div>
-        </div>      
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-success btn-lg btn-custom">CADASTRAR</button>
+        </div>
         
-        <div class="col-auto mb-3">
-            <button class="d-flex justify-content-end btn btn-success">Cadastrar</button>
-        </div>
-       
-        {% for i in "0123456789" %}
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <label for="image{{ i }}">Imagem {{ i }}</label>
-                <input type="file" name="image{{ i }}" class="form-control" accept="image/*">
-            </div>
-        </div>
-        {% endfor %}
+        </form> 
+    </div>
 
-       
-    </form> 
+
+    <script>
+        // Função para configurar o upload de imagem dinamicamente para cada profile-img
+        function configurarUploadProfile() {
+            let profileImgs = document.querySelectorAll('[id^="profile-img"]');
+            profileImgs.forEach(function(profilePic) {
+                let inputImgId = profilePic.id.replace("profile-img", "input-img");
+                let inputURLId = profilePic.id.replace("profile-img", "image-url");
+                let inputFile = document.getElementById(inputImgId);
+                let inputURL = document.getElementById(inputURLId);
+                let perfilUploadDiv = profilePic.parentElement;                 
+    
+                inputFile.onchange = function(){
+                    profilePic.src = URL.createObjectURL(inputFile.files[0]);
+                    profilePic.style.display = 'block';
+                    perfilUploadDiv.style.backgroundImage = 'none';
+
+    
+                    // Atualizar o valor do input com a URL da imagem
+                    inputURL.value = profilePic.src;
+                    profilePic.src = inputURL.value
+                };
+            });
+        }
+    
+        // Chamar a função para configurar o upload de imagem para cada profile-img
+        configurarUploadProfile();
+
+        
+    </script>    
 {% endblock %}

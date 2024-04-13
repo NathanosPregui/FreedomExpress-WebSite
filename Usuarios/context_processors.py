@@ -1,5 +1,8 @@
-from Clientes.models import PerfilImages
+from Clientes.models import PerfilImages,Usuario
 from django.contrib.auth.models import User
+from Fornecedores.models import Fornecedor
+
+
 
 def perfil_image(request):
     # Identificar o usuário logado
@@ -20,3 +23,19 @@ def perfil_image(request):
 
     # Retornar a URL da imagem de perfil no dicionário
     return {'perfil_image_url': image_url}
+
+
+
+def check(request):
+    usuario = request.user
+    fornecedor = None
+    check = None
+    userID = None
+
+    if usuario.is_authenticated:
+        fornecedor = Fornecedor.objects.filter(representante=usuario)
+        userID = Usuario.objects.filter(id=request.user.id)  # Correção aqui
+        if fornecedor.exists():
+            check = fornecedor
+
+    return {'fornecedorcheck': check, 'userid': userID}

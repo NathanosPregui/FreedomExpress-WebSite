@@ -16,7 +16,7 @@
     
 
     <link rel="stylesheet" href="{% static 'css/menu.css' %}">
-    <link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+   
 
 
    
@@ -44,14 +44,27 @@
                     
                     <div class="useroptions">
                         <ul>
-                            <li>Meus pedidos</li>
-                            <li>Lista de desejos</li>
-                        </ul>
+                            {% if request.user.is_authenticated %}                             
+                                <li><a href="{% url 'perfil_usuario' userid.0.id %}"></a>Perfil</li>
+                                {%if fornecedorcheck %}
+                                <li><a href="{% url 'editar_fornecedor' fornecedorcheck.0.id %}"></a>Perfil da sua loja</li>
+                                <li><a href="{% url 'meus_produtos' %}"></a>Meus produtos</li>            
+                                {%else%}
+                                <li><a href="{%url 'fornecedor_cadastro' %}"></a>Virar vendedor</li>
+
+                                {%endif%}
+                                
+                                <li>Meus pedidos</li>
+                                <li>Lista de desejos</li>
+                                  
+                            {% endif %}
+
+                           
+                        </ul>                     
                         {% if request.user.is_authenticated %}                            
                             <a href="{% url 'logout' %}" class="buttonbtn" style="width: 100%;"><span>Logout</span></a>
                         {% else %}
-                            <a href="{% url 'login' %}" class="buttonbtn" style="width: 100%;"><span>Login</span></a>
-                            
+                            <a href="{% url 'login' %}" class="buttonbtn" style="width: 100%;"><span>Login</span></a>                                                   
                         {% endif %}
                        
                        
@@ -103,10 +116,7 @@
 </body>
 {% bootstrap_javascript %}
 
-<!--Swiper-->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script src="{% static 'js/Carousel.js' %}"></script>
 
 <script>
     function verificarInput() {

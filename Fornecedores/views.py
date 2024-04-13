@@ -4,6 +4,7 @@ from Fornecedores import views
 from .models import Fornecedor
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 
@@ -16,10 +17,12 @@ def index(request):
 
 def cadastro(request):
     usuario = request.user
+    fornecedor = Fornecedor.objects.filter(representante=usuario)
 
-    if Fornecedor.objects.filter(representante=usuario).exists():
-        return redirect('index')
+    
     if usuario.is_authenticated:
+        if fornecedor:
+            return redirect('index')
         return render(request,'fornecedor_cadastro.html')
     else:
         return redirect('index')
@@ -65,7 +68,20 @@ def criar(request):
 
     return render(request, 'fornecedor_cadastro.html')
 
+def fornecedor_editar(request,id_fornecedor):
+    fornecedor = get_object_or_404(Fornecedor,pk=id_fornecedor)
+    return render(request,'fornecedor_editar.html',{'fornecedor':fornecedor})
 
-  
-   
+def atualizar_fornecedor(request):
+    id_fornecedor = request.POST.get('id')
+    fornecedor = Fornecedor.objects.get(pk=id_fornecedor)
+    fornecedor.empresa = request.POST.get('nomeempresa')
+    fornecedor.telefone = request.POST.get('telefone')
+    fornecedor.cnpj = request.POST.get('CNPJ')
+    fornecedor.endereco = request.POST.get('endereco')
+    fornecedor.pais = request.POST.get('pais')
+    
+    fornecedor.save()
+    return redirect(reverse('editar_fornecedor', kwargs={'id_fornecedor': id_fornecedor}))
+      
     

@@ -1,0 +1,179 @@
+{% extends 'master.html' %}
+
+
+{% block content %}
+{% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/produtocadastro.css' %}">
+
+    <div class="cadastrocard">
+        <h1>EDITAR PRODUTO</h1>
+        <form action="{% url 'atualizar_produto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{produto.id}}">
+            <div class="mb-3">
+                <label for="nome">Nome do produto</label>
+                <input type="text" name="nome" class="form-control" value="{{produto.nome}}" required>                            
+            </div>    
+            
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="preco">Preço</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" aria-label="" name="preco" value="{{produto.preco}}">
+                    </div>
+                </div>
+            
+                <div class="col">
+                    <label for="estoque">Estoque</label>
+                    <input type="number" name="estoque" class="form-control" value="{{ produto.estoque }}" required>
+                </div>     
+                <div class="col">
+                    
+                    <label for="estoque">Categoria</label>
+                    <select class="form-select" aria-label="Default select example" name="cateroria" id="selectValor" required>
+                        <option value="">Nenhuma</option>
+                        <option value="Brinquedos" {% if produto.categoria == "Brinquedos" %} selected {% endif %}>Brinquedos</option>
+                        <option value="Action-Figures" {% if produto.categoria == "Action-Figures" %} selected {% endif %}>Action-Figures</option>
+                        <option value="Cosplay" {% if produto.categoria == "Cosplay" %} selected {% endif %}>Cosplay</option>
+                        <option value="Maquiagem" {% if produto.categoria == "Maquiagem" %} selected {% endif %}>Maquiagem</option>
+                        <option value="Roupas" {% if produto.categoria == "Roupas" %} selected {% endif %}>Roupas</option>
+                        <option value="Peças" {% if produto.categoria == "Peças" %} selected {% endif %}>Peças</option>
+                        <option value="Eletronicos" {% if produto.categoria == "Eletronicos" %} selected {% endif %}>Eletrônicos</option>
+                        <option value="Livros" {% if produto.categoria == "Livros" %} selected {% endif %}>Livros</option>
+                        <option value="Moveis" {% if produto.categoria == "Moveis" %} selected {% endif %}>Móveis</option>
+                        <option value="Decoracao" {% if produto.categoria == "Decoracao" %} selected {% endif %}>Decoração</option>
+                        <option value="Esportes" {% if produto.categoria == "Esportes" %} selected {% endif %}>Artigos Esportivos</option>
+                    </select>
+                </div>         
+                
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="descricao">{{produto.descricao}}</textarea>
+            </div>
+            
+            <div class="h4 centertitle">Imagens do produto</div>
+            <div class="mb-3 containerimgs">
+                {% for imagem_produto in imagens_produtos %}
+                    <div class="imagesupload-container">
+                        <input type="hidden" id="image-url{{ imagem_produto.slot }}" name="imgurl{{ imagem_produto.slot }}" value="{{ imagem_produto.image.url }}">
+                        <label for="input-img{{ imagem_produto.slot }}" class="imgupload">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <img id="profile-img{{ imagem_produto.slot }}" src="{{ imagem_produto.image.url }}" alt="Imagem{{ imagem_produto.slot }}" onerror="this.style.display = 'none';">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <input type="file" id="input-img{{ imagem_produto.slot }}" name="image{{ imagem_produto.slot }}" class="form-control" accept="image/*">
+                        </label>
+                    </div>                         
+                   
+                {% endfor %}
+
+                {% for i in slot %}
+                   
+                    <div class="imagesupload-container">
+                        <input type="hidden" id="image-url{{ i }}" name="imgurl{{ i }}">
+                        <label for="input-img{{ i }}" class="imgupload">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <img id="profile-img{{ i }}" src="" alt="Imagem{{ i }}" style="display: none;">
+                            <span class="material-symbols-outlined">
+                                upload
+                            </span>
+                            <input type="file" id="input-img{{ i }}" name="image{{ i }}" class="form-control" accept="image/*">
+                        </label>
+                    </div>
+               
+                {% endfor %}
+            
+            </div>
+        <div class="gap-3" style="display: flex;justify-content: center;align-items: center;">
+            <div class="">
+                <button type="button" class="btn btn-warning btn-lg btn-custom" data-bs-toggle="modal" data-bs-target="#edição">Salvar Alterações</button>
+            </div>
+            <div class="">
+                <button type="button" class="btn btn-danger btn-lg btn-custom" data-bs-toggle="modal" data-bs-target="#deletar">Deletar</button>
+            </div>
+        </div>
+        <!-- Modal salvar edições -->
+        <div class="modal fade" id="edição" tabindex="-1" aria-labelledby="edição" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Salvar Alterações</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Tem certeza que quer salvar as Alterações?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-warning">Salvar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+            <!-- Modal salvar edições -->
+            <div class="modal fade" id="deletar" tabindex="-1" aria-labelledby="deletar" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Deletar produto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    Tem certeza que quer deletar?             
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>  
+                    <a href="{% url 'deletar_produto' produto.id %}" class="btn btn-danger">Deletar</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        
+        </form> 
+    </div>
+
+
+
+  
+  
+
+    <script>
+        // Função para configurar o upload de imagem dinamicamente para cada profile-img
+        function configurarUploadProfile() {
+            let profileImgs = document.querySelectorAll('[id^="profile-img"]');
+            profileImgs.forEach(function(profilePic) {
+                let slot = profilePic.id.replace("profile-img", "");
+                let inputImgId = "input-img" + slot;
+                let inputURLId = "image-url" + slot;
+                let inputFile = document.getElementById(inputImgId);
+                let inputURL = document.getElementById(inputURLId);
+                let perfilUploadDiv = profilePic.parentElement;                 
+            
+                inputFile.onchange = function(){
+                    profilePic.src = URL.createObjectURL(inputFile.files[0]);
+                    profilePic.style.display = 'block';
+                    perfilUploadDiv.style.backgroundImage = 'none';
+            
+                    // Atualizar o valor do input com a URL da imagem
+                    inputURL.value = profilePic.src;
+                };
+            });
+        }
+
+// Chamar a função para configurar o upload de imagem para cada profile-img
+configurarUploadProfile();
+
+    
+  
+    
+        
+    </script>    
+{% endblock %}

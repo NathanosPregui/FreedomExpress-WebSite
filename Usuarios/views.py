@@ -5,13 +5,26 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from Clientes.models import Usuario
 from Clientes.models import PerfilImages
+from Produtos.models import Produto,ProdutosImagens
 
 
 # Create your views here.
 
 
 def index(request):
-    return render(request,'index.html')
+    categorias = ['Action-Figures','Cosplay','Roupas','Brinquedos', 'Maquiagem',  'Peças', 'Eletronicos', 'Livros', 'Moveis', 'Decoracao', 'Esportes']
+    
+    produtos_com_imagens_por_categoria = {}
+    
+    for categoria in categorias:
+        produtos_categoria = Produto.objects.filter(categoria=categoria)
+        produtos_com_imagens = []
+        for produto in produtos_categoria:
+            imagem = ProdutosImagens.objects.filter(produto=produto).order_by('slot').first()
+            produtos_com_imagens.append({'produto': produto, 'imagem': imagem})
+        produtos_com_imagens_por_categoria[categoria] = produtos_com_imagens
+
+    return render(request, 'index.html', {'produtos_com_imagens_por_categoria': produtos_com_imagens_por_categoria})
 
 
 def login_user(request):

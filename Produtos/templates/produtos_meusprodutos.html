@@ -1,0 +1,45 @@
+{% extends 'master.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/meusprodutos.css' %}">
+
+   
+<div class="produtos-container">
+    <h1>MEUS PRODUTO</h1>
+    <div class="produtos-content">
+        {%for produto in produtos_com_imagens %}
+        <div class="produto-card">
+            <div class="produto-image">
+                <img src="{{produto.imagem.image.url}}" alt="">
+            </div>
+            <ul class="produto-info">
+                <h4>{{produto.produto.nome}}</h4>
+                <ul>
+                    <li>
+                        <a href="{% url 'produto_editar' produto.produto.id %}" class="btn">
+                            <span class="material-symbols-outlined text-warning">
+                                edit
+                            </span>
+                        </a>
+                       
+                    </li>
+                    <li>
+                        <a href="{% url 'visualizar_produto' produto.produto.id %}" class="btn">
+                            <span class="material-symbols-outlined text-success">
+                                preview
+                            </span>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </ul>
+        </div>
+          
+ 
+        {% endfor%}
+
+    </div>
+</div>                         
+
+{% endblock %}

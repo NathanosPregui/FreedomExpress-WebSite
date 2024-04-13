@@ -5,20 +5,20 @@
 <link rel="stylesheet" href="{% static 'css/forms.css' %}">
 <div  class="form-card-background">
     <div class="form-card">
-        <form method="post" enctype="multipart/form-data">
+        <form action="{% url 'atualizar_usuario'%}" method="post"  enctype="multipart/form-data">
 
-            
+            <input type="hidden" name="id" value="{{usuario.id}}">
 
 
-            <h1 class="text-center">CRIAR CONTA</h1>
+
+            <h1 class="text-center">PERFIL</h1>
           
             
             {% csrf_token %}
             <input type="hidden" id="image-url" name="imgurl" readonly>
-
             <div class="perfilupload"  {% if perfil_image_url %} style="background: aliceblue;" {% endif %}>
                 <label for="Input-img" id="labelimg"  {% if perfil_image_url %} style="background: aliceblue;" {% endif %}>
-                    <img src="{{request.POST.imgurl}}" alt="" id="profile-img" onerror="this.style.display = 'none';">
+                    <img src="{{imagemperfil.image.url}}" alt="" id="profile-img" onerror="this.style.display = 'none';">
                     <div class="upicon">
                         <span class="material-symbols-outlined">
                             upload
@@ -35,53 +35,53 @@
                 <div class="part1">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control"  value="{{ request.POST.nome}}" name="nome" required>
+                        <input type="text" class="form-control"  value="{{usuario.nome}}" name="nome" required>
                     </div>
                     <div class="mb-3">
                         <label for="sobrenome" class="form-label">Sobrenome:</label>
-                        <input type="text" class="form-control" value="{{ request.POST.sobrenome}}" name="sobrenome" required>
+                        <input type="text" class="form-control" value="{{usuario.sobrenome}}" name="sobrenome" required>
                     </div>
                     <div class="mb-3">
                         <label for="data_nascimento" class="form-label">Data de Nascimento:</label>
-                        <input type="date" class="form-control" value="{{ request.POST.data_nascimento}}" name="data_nascimento" required>
+                        <input type="date" class="form-control" value="{{ usuario.data_nascimento|date:'Y-m-d' }}" name="data_nascimento" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" value="{{ request.POST.email}}" name="email" required>
+                        <input type="email" class="form-control" value="{{usuario.email}}" name="email" required>
                     </div>
                     <div class="mb-3">
                         <label for="cpf" class="form-label">CPF:</label>
-                        <input type="text" class="form-control" value="{{ request.POST.cpf}}" name="cpf" required>
+                        <input type="text" class="form-control" value="{{usuario.cpf}}" name="cpf" required>
                     </div>
                     <div class="mb-3">
                         <label for="senha" class="form-label">Senha:</label>
-                        <input type="password" class="form-control" name="senha" required>
+                        <input type="password" id="seuInput" class="form-control" value="" placeholder="Digite outra senha para alterar" name="senha">
                     </div>
                     <div class="mb-3">
                         <label for="confirsenha" class="form-label">Confirmar senha:</label>
-                        <input type="password" class="form-control" name="confirsenha" required>
-                        {% if erros.confirmarsenha %}<span class="text-danger">{{ erros.confirmarsenha }}</span>{% endif %}
+                        <input type="password" id="seuInput2" class="form-control" name="confirsenha">
+                        {% if erros.confirmarsenha %}<span class="text-danger">{{ erros.confirmarsenha}}</span>{% endif %}
                     </div>
                 </div>
                 <div class="part2">
                     <div class="mb-3">
                         <label for="rua" class="form-label">Rua:</label>
-                        <input type="text" class="form-control" value="{{ request.POST.rua}}" name="rua" required>
+                        <input type="text" class="form-control" value="{{usuario.rua}}" name="rua" required>
                     </div>
                     <div class="mb-3">
                         <label for="numero" class="form-label">Número:</label>
-                        <input type="number" class="form-control" value="{{ request.POST.numero}}" name="numero" required>
+                        <input type="number" class="form-control" value="{{usuario.numero}}" name="numero" required>
                     </div>
                     <div class="mb-3">
                         <label for="complemento" class="form-label">Complemento:</label>
-                        <input type="text" class="form-control" value="{{ request.POST.complemento}}" name="complemento">
+                        <input type="text" class="form-control" value="{{usuario.complemento}}" name="complemento">
                     </div>
                     
                 </div>
             </div>
             
             <div class="d-grid gap-2 col-6 mx-auto">
-                <input type="submit" value="Registrar" class="btn btn-success">
+                <button type="submit" class="btn btn-warning">Salvar Alterações</button>
             </div>
         
        
@@ -104,7 +104,22 @@
         inputURL.value = profilePic.src;
     };
 
-  
+     // Função para adicionar ou remover o atributo required com base no valor do input
+     function toggleRequired() {
+        var inputField = document.getElementById('seuInput');
+        var inputField2 = document.getElementById('seuInput2'); // Substitua 'seuInput' pelo ID do seu input
+        if (inputField.value.trim() !== '') { // Verifica se o campo não está vazio
+            inputField.setAttribute('required', ''); // Adiciona o atributo required
+            inputField2.setAttribute('required', ''); // Adiciona o atributo required
+        } else {
+            inputField.removeAttribute('required'); // Remove o atributo required
+            inputField2.removeAttribute('required'); // Remove o atributo required
+        }
+
+     }
+
+    // Event listener para chamar a função toggleRequired() quando o valor do input mudar
+    document.getElementById('seuInput').addEventListener('input', toggleRequired);
     
 
      
