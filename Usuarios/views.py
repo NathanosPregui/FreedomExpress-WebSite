@@ -41,7 +41,7 @@ def login_user(request):
                 login(request, user)
                 return redirect('index')  # Redirecionar para a página inicial após o login
             else:
-                return HttpResponse('Credenciais inválidas')
+                    return render(request, 'login.html',{'error_message': 'Usuario inexistente'})
 
         return render(request, 'login.html')
 

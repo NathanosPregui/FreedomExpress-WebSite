@@ -1,38 +1,25 @@
 {% extends 'master.html' %}
 
 {% block content %}
-
-<div class="row">
-    <div class="col-md4 offset-md4-4">
-        <div class="card auth-card">
-            <div class="card-body">
-                {{ error_message }}
-                <h4 class="card-title text-center">
-                    Entrar
-                </h4>
-                <form  action="{% url 'login' %}" method="POST">
-                    {% csrf_token %}
-               
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" class="form-control" value="{{ request.POST.email}}">                            
-                            {% if erros.email %}<span class="text-danger">{{ erros.email }}</span>{% endif %}
-                        </div>
-                    </div>  
-
-                    <div class="row mb-3">
-                        <div class="col-md-3">
-                            <label for="senha">Senha</label>
-                            <input type="password" name="senha" class="form-control" value="{{ request.POST.senha}}">                            
-                            {% if erros.senha %}<span class="text-danger">{{ erros.senha }}</span>{% endif %}
-                        </div>
-                    </div>  
-
-                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
-                </form>
-            </div>
+<h1 style="text-align: center;margin-top: 20px;margin-bottom: 30px;">Login</h1>
+<div class="row" style="padding: 30%;padding-top: 0;padding-bottom: 0;">
+    <form action="{% url 'login' %}" method="POST">
+        <p class="text-danger">{{ error_message }}</p>
+        {% csrf_token %}
+ 
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>
-    </div>
+        <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Senha</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+        <a href="{%url 'cliente_cadastro'%}">Criar uma conta</a>
+    </form>
 </div>
+
 {% endblock %}
