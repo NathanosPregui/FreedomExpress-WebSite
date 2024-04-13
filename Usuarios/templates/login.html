@@ -3,23 +3,25 @@
 {% block content %}
 <h1 style="text-align: center;margin-top: 20px;margin-bottom: 30px;">Login</h1>
 <div class="row" style="padding: 30%;padding-top: 0;padding-bottom: 0;">
-    <form action="{% url 'login' %}" method="POST">
-        <p class="text-danger">{{ error_message }}</p>
+    <form  action="{% url 'login' %}" method="POST">
         {% csrf_token %}
+        <p class="text-danger">{{ error_message }}</p>
+       
  
         <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+        <label class="form-label">Email</label>
+        <input type="text" name="email" class="form-control" value="{{ request.POST.email}}">
         </div>
         <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" name="senha">
+        <label class="form-label">Senha</label>
+        <input type="password" name="senha" class="form-control" >
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Entrar</button>
         </div>
-        <a href="{%url 'cliente_cadastro'%}">Criar uma conta</a>
+        
     </form>
+    <a href="{%url 'cliente_cadastro'%}">Criar uma conta</a>
 </div>
 
 {% endblock %}

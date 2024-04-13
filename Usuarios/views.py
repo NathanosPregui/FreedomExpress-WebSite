@@ -3,8 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout as auth_logout
 from django.contrib import messages
 from django.contrib.auth.models import User
-from Clientes.models import Usuario
-from Clientes.models import PerfilImages
+from Clientes.models import Usuario,PerfilImages
 from Produtos.models import Produto,ProdutosImagens
 
 
@@ -36,12 +35,18 @@ def login_user(request):
         if request.method == 'POST':
             email = request.POST.get('email')
             senha = request.POST.get('senha')
-            user = authenticate(request, email=email, password=senha)
-            if user is not None:
-                login(request, user)
-                return redirect('index')  # Redirecionar para a página inicial após o login
-            else:
-                    return render(request, 'login.html',{'error_message': 'Usuario inexistente'})
+ 
+
+          
+            if  Usuario.objects.filter(email=email).exists():
+  
+                veremail = Usuario.objects.filter(password=request.POST.get('senha')).exists()
+                user = authenticate(request,email=email,password=senha)
+                if user is not None:
+                    login(request, user)
+                    return redirect('index')  # Redirecionar para a página inicial após o login
+                else:
+                    return render(request, 'login.html',{'error_message':veremail})
 
         return render(request, 'login.html')
 
